@@ -17,8 +17,8 @@ before_install:
 script:
   - docker import build/platformsdk-i486.tar coderus/sailfishos-platform-sdk-base:latest
   - docker tag coderus/sailfishos-platform-sdk-base:latest coderus/sailfishos-platform-sdk-base:$RELEASE
-  - docker build --build-arg RELEASE=$RELEASE -t coderus/sailfishos-buildengine:latest .
-  - docker tag coderus/sailfishos-buildengine:latest coderus/sailfishos-buildengine:$RELEASE
+  - docker build --build-arg RELEASE=$RELEASE -t coderus/sailfishos-platform-sdk:latest .
+  - docker tag coderus/sailfishos-platform-sdk:latest coderus/sailfishos-platform-sdk:$RELEASE
 
 deploy:
   provider: script
