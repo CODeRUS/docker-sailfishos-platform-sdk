@@ -1,0 +1,8 @@
+#!/bin/bash
+# Hack to prevent a chroot when already running in a container
+
+if [[ $# -ne 0 ]]; then
+    "${@}"
+else
+    /bin/bash --login
+fi

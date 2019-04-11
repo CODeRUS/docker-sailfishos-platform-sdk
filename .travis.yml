@@ -1,0 +1,27 @@
+language: generic
+
+env:
+  - RELEASE=3.0.2.8
+
+services:
+  - docker
+
+before_install:
+  - docker pull coderus/sailfishos-baseimage
+  - docker run --rm --privileged -it
+    -e RELEASE=$RELEASE
+    -v $(pwd):/share -w /share
+    coderus/sailfishos-baseimage
+    bash build-all.sh
+
+script:
+  - docker import build/platformsdk-i486.tar coderus/sailfishos-platform-sdk-base:latest
+  - docker tag coderus/sailfishos-platform-sdk-base:latest coderus/sailfishos-platform-sdk-base:$RELEASE
+  - docker build --build-arg RELEASE=$RELEASE -t coderus/sailfishos-buildengine:latest .
+  - docker tag coderus/sailfishos-buildengine:latest coderus/sailfishos-buildengine:$RELEASE
+
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
