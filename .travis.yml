@@ -1,27 +1,31 @@
 language: generic
 
-env:
-  - RELEASE=3.0.2.8
+branches:
+  except:
+    - master
 
 services:
   - docker
 
 before_install:
+  - if [ -z "$TRAVIS_TAG" ]; then exit 0; fi
   - docker pull coderus/sailfishos-baseimage
   - docker run --rm --privileged -it
-    -e RELEASE=$RELEASE
+    -e RELEASE=$TRAVIS_TAG
     -v $(pwd):/share -w /share
     coderus/sailfishos-baseimage
     bash build-all.sh
 
 script:
+  - if [ -z "$TRAVIS_TAG" ]; then exit 0; fi
   - docker import build/platformsdk-i486.tar coderus/sailfishos-platform-sdk-base:latest
-  - docker tag coderus/sailfishos-platform-sdk-base:latest coderus/sailfishos-platform-sdk-base:$RELEASE
-  - docker build --build-arg RELEASE=$RELEASE -t coderus/sailfishos-platform-sdk:latest .
-  - docker tag coderus/sailfishos-platform-sdk:latest coderus/sailfishos-platform-sdk:$RELEASE
+  - docker tag coderus/sailfishos-platform-sdk-base:latest coderus/sailfishos-platform-sdk-base:$TRAVIS_TAG
+  - docker build --build-arg RELEASE=$TRAVIS_TAG -t coderus/sailfishos-platform-sdk:latest .
+  - docker tag coderus/sailfishos-platform-sdk:latest coderus/sailfishos-platform-sdk:$TRAVIS_TAG
+  - sudo rm -rf build
 
 deploy:
   provider: script
-  script: bash docker_push
   on:
-    branch: master
+    tags: true
+  script: bash docker_push

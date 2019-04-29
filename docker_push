@@ -1,9 +1,11 @@
 #!/bin/bash
 
+if [ -z "$TRAVIS_TAG" ]; then exit 0; fi
+
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 docker push coderus/sailfishos-platform-sdk-base:latest
-docker push coderus/sailfishos-platform-sdk-base:$RELEASE
+docker push coderus/sailfishos-platform-sdk-base:$TRAVIS_TAG
 
 docker push coderus/sailfishos-platform-sdk:latest
-docker push coderus/sailfishos-platform-sdk:$RELEASE
+docker push coderus/sailfishos-platform-sdk:$TRAVIS_TAG
