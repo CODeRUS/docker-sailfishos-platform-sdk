@@ -13,6 +13,7 @@ repo --name=sdk-@RELEASE@-@ARCH@ --baseurl=https://releases.jolla.com/releases/@
 %packages
 @Jolla Configuration Platform SDK Chroot
 ssu-vendor-data-jolla
+patterns-sailfish-sb2-armv7hl
 %end
 
 %pre
