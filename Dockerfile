@@ -13,7 +13,6 @@ WORKDIR /home/nemo
 RUN set -ex ;\
  sudo mkdir /host_targets ;\
  sudo zypper ref ;\
- sudo zypper -qn in tar ;\
  sdk-assistant -y create SailfishOS-$RELEASE /tooling-i486.tar ;\
  sudo rm -f /tooling-i486.tar ;\
  sdk-assistant -y create SailfishOS-$RELEASE-i486 /target-i486.tar ;\
