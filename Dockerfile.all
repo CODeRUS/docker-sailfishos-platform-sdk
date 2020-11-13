@@ -11,7 +11,6 @@ USER nemo
 WORKDIR /home/nemo
 
 RUN set -ex ;\
- sudo mkdir /host_targets ;\
  sudo zypper ref ;\
  sdk-assistant -y create SailfishOS-$RELEASE-i486 /target-i486.tar ;\
  sudo rm -f /target-i486.tar ;\
