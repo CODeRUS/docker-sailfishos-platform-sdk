@@ -65,7 +65,7 @@ jobs:
         docker build --build-arg RELEASE=$RELEASE --build-arg ARCH=aarch64 -t coderus/sailfishos-platform-sdk-aarch64:latest -f Dockerfile.arch .
         docker tag coderus/sailfishos-platform-sdk-aarch64:latest coderus/sailfishos-platform-sdk-aarch64:$RELEASE
 
-    - name: Test Login to DockerHub
+    - name: Login to DockerHub
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
