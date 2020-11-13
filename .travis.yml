@@ -20,8 +20,15 @@ script:
   - if [ -z "$TRAVIS_TAG" ]; then exit 0; fi
   - docker import build/platformsdk-i486.tar coderus/sailfishos-platform-sdk-base:latest
   - docker tag coderus/sailfishos-platform-sdk-base:latest coderus/sailfishos-platform-sdk-base:$TRAVIS_TAG
-  - docker build --build-arg RELEASE=$TRAVIS_TAG -t coderus/sailfishos-platform-sdk:latest .
+  - docker build --build-arg RELEASE=$TRAVIS_TAG -t coderus/sailfishos-platform-sdk-base-tooling:latest -f Dockerfile.tooling .
+  - docker build --build-arg RELEASE=$TRAVIS_TAG -t coderus/sailfishos-platform-sdk:latest -f Dockerfile.all .
   - docker tag coderus/sailfishos-platform-sdk:latest coderus/sailfishos-platform-sdk:$TRAVIS_TAG
+  - docker build --build-arg RELEASE=$TRAVIS_TAG --build-arg ARCH=armv7hl -t coderus/sailfishos-platform-sdk-armv7hl:latest -f Dockerfile.arch .
+  - docker tag coderus/sailfishos-platform-sdk-armv7hl:latest coderus/sailfishos-platform-sdk-armv7hl:$TRAVIS_TAG
+  - docker build --build-arg RELEASE=$TRAVIS_TAG --build-arg ARCH=i486 -t coderus/sailfishos-platform-sdk-i486:latest -f Dockerfile.arch .
+  - docker tag coderus/sailfishos-platform-sdk-i486:latest coderus/sailfishos-platform-sdk-i486:$TRAVIS_TAG
+  - docker build --build-arg RELEASE=$TRAVIS_TAG --build-arg ARCH=aarch64 -t coderus/sailfishos-platform-sdk-aarch64:latest -f Dockerfile.arch .
+  - docker tag coderus/sailfishos-platform-sdk-aarch64:latest coderus/sailfishos-platform-sdk-aarch64:$TRAVIS_TAG
   - sudo rm -rf build
 
 deploy:

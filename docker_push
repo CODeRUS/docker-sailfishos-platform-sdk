@@ -9,3 +9,12 @@ docker push coderus/sailfishos-platform-sdk-base:$TRAVIS_TAG
 
 docker push coderus/sailfishos-platform-sdk:latest
 docker push coderus/sailfishos-platform-sdk:$TRAVIS_TAG
+
+docker push coderus/sailfishos-platform-sdk-i486:latest
+docker push coderus/sailfishos-platform-sdk-i486:$TRAVIS_TAG
+
+docker push coderus/sailfishos-platform-sdk-armv7hl:latest
+docker push coderus/sailfishos-platform-sdk-armv7hl:$TRAVIS_TAG
+
+docker push coderus/sailfishos-platform-sdk-aarch64:latest
+docker push coderus/sailfishos-platform-sdk-aarch64:$TRAVIS_TAG

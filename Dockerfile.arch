@@ -1,0 +1,18 @@
+FROM coderus/sailfishos-platform-sdk-base-tooling
+MAINTAINER Andrey Kozhevnikov <coderusinbox@gmail.com>
+
+ARG RELEASE
+ARG ARCH
+
+COPY build/target-$ARCH.tar /target-$ARCH.tar
+
+USER nemo
+WORKDIR /home/nemo
+
+RUN set -ex ;\
+ sudo mkdir /host_targets ;\
+ sudo zypper ref ;\
+ sdk-assistant -y create SailfishOS-$RELEASE-$ARCH /target-$ARCH.tar ;\
+ sudo rm -f /target-$ARCH.tar ;\
+ sudo rm -rf /var/cache/zypp/* ;\
+ sudo rm -rf /srv/mer/targets/SailfishOS-$RELEASE-$ARCH/var/cache/zypp/*
