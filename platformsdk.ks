@@ -11,7 +11,7 @@ repo --name=jolla-@RELEASE@-@ARCH@ --baseurl=https://releases.jolla.com/releases
 repo --name=sdk-@RELEASE@-@ARCH@ --baseurl=https://releases.jolla.com/releases/@RELEASE@/sdk/@ARCH@/
 
 %packages
-@Jolla Configuration Platform SDK Chroot
+patterns-sailfish-configuration-platform-sdk-chroot
 ssu-vendor-data-jolla
 patterns-sailfish-sb2-armv7hl
 kmod
