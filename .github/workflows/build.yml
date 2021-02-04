@@ -40,7 +40,7 @@ jobs:
         set -x
         docker import build/platformsdk-i486.tar coderus/sailfishos-platform-sdk-base:latest
         docker tag coderus/sailfishos-platform-sdk-base:latest coderus/sailfishos-platform-sdk-base:$RELEASE
-        rm -rf build/platformsdk-i486.tar
+        sudo rm -rf build/platformsdk-i486.tar
         docker push coderus/sailfishos-platform-sdk-base:latest
         docker push coderus/sailfishos-platform-sdk-base:$RELEASE
 
@@ -71,7 +71,7 @@ jobs:
         docker push coderus/sailfishos-platform-sdk-i486:$RELEASE
         docker rmi -f coderus/sailfishos-platform-sdk-i486:$RELEASE
         docker rmi -f coderus/sailfishos-platform-sdk-i486:latest
-        rm -rf build/target-i486.tar
+        sudo rm -rf build/target-i486.tar
 
     - name: Setup armv7hl
       run: |
@@ -82,7 +82,7 @@ jobs:
         docker push coderus/sailfishos-platform-sdk-armv7hl:$RELEASE
         docker rmi -f coderus/sailfishos-platform-sdk-armv7hl:$RELEASE
         docker rmi -f coderus/sailfishos-platform-sdk-armv7hl:latest
-        rm -rf build/target-armv7hl.tar
+        sudo rm -rf build/target-armv7hl.tar
 
     - name: Setup aarch64
       run: |
@@ -93,4 +93,4 @@ jobs:
         docker push coderus/sailfishos-platform-sdk-aarch64:$RELEASE
         docker rmi -f coderus/sailfishos-platform-sdk-aarch64:$RELEASE
         docker rmi -f coderus/sailfishos-platform-sdk-aarch64:latest
-        rm -rf build/target-aarch64.tar
+        sudo rm -rf build/target-aarch64.tar
