@@ -18,6 +18,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
     - name: Prepare
       if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
       run: echo "RELEASE=${GITHUB_REF##*/}" >> $GITHUB_ENV
@@ -34,56 +40,57 @@ jobs:
         set -x
         docker import build/platformsdk-i486.tar coderus/sailfishos-platform-sdk-base:latest
         docker tag coderus/sailfishos-platform-sdk-base:latest coderus/sailfishos-platform-sdk-base:$RELEASE
+        rm -rf build/platformsdk-i486.tar
+        docker push coderus/sailfishos-platform-sdk-base:latest
+        docker push coderus/sailfishos-platform-sdk-base:$RELEASE
 
     - name: Setup tooling
       run: |
         set -x
         docker build --build-arg RELEASE=$RELEASE -t coderus/sailfishos-platform-sdk-base-tooling:latest -f Dockerfile.tooling .
         docker tag coderus/sailfishos-platform-sdk-base-tooling:latest coderus/sailfishos-platform-sdk-base-tooling:$RELEASE
+        docker push coderus/sailfishos-platform-sdk-base-tooling:latest
+        docker push coderus/sailfishos-platform-sdk-base-tooling:$RELEASE
 
     - name: Setup release
       run: |
         set -x
         docker build --build-arg RELEASE=$RELEASE -t coderus/sailfishos-platform-sdk:latest -f Dockerfile.all .
         docker tag coderus/sailfishos-platform-sdk:latest coderus/sailfishos-platform-sdk:$RELEASE
+        docker push coderus/sailfishos-platform-sdk:latest
+        docker push coderus/sailfishos-platform-sdk:$RELEASE
+        docker rmi -f coderus/sailfishos-platform-sdk:$RELEASE
+        docker rmi -f coderus/sailfishos-platform-sdk:latest
 
     - name: Setup i486
       run: |
         set -x
         docker build --build-arg RELEASE=$RELEASE --build-arg ARCH=i486 -t coderus/sailfishos-platform-sdk-i486:latest -f Dockerfile.arch .
         docker tag coderus/sailfishos-platform-sdk-i486:latest coderus/sailfishos-platform-sdk-i486:$RELEASE
+        docker push coderus/sailfishos-platform-sdk-i486:latest
+        docker push coderus/sailfishos-platform-sdk-i486:$RELEASE
+        docker rmi -f coderus/sailfishos-platform-sdk-i486:$RELEASE
+        docker rmi -f coderus/sailfishos-platform-sdk-i486:latest
+        rm -rf build/target-i486.tar
 
     - name: Setup armv7hl
       run: |
         set -x
         docker build --build-arg RELEASE=$RELEASE --build-arg ARCH=armv7hl -t coderus/sailfishos-platform-sdk-armv7hl:latest -f Dockerfile.arch .
         docker tag coderus/sailfishos-platform-sdk-armv7hl:latest coderus/sailfishos-platform-sdk-armv7hl:$RELEASE
+        docker push coderus/sailfishos-platform-sdk-armv7hl:latest
+        docker push coderus/sailfishos-platform-sdk-armv7hl:$RELEASE
+        docker rmi -f coderus/sailfishos-platform-sdk-armv7hl:$RELEASE
+        docker rmi -f coderus/sailfishos-platform-sdk-armv7hl:latest
+        rm -rf build/target-armv7hl.tar
 
     - name: Setup aarch64
       run: |
         set -x
         docker build --build-arg RELEASE=$RELEASE --build-arg ARCH=aarch64 -t coderus/sailfishos-platform-sdk-aarch64:latest -f Dockerfile.arch .
         docker tag coderus/sailfishos-platform-sdk-aarch64:latest coderus/sailfishos-platform-sdk-aarch64:$RELEASE
-
-    - name: Login to DockerHub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
-    - name: Push to Docker Hub
-      if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
-      run: |
-        set -x
-        docker push coderus/sailfishos-platform-sdk-base:latest
-        docker push coderus/sailfishos-platform-sdk-base:$RELEASE
-        docker push coderus/sailfishos-platform-sdk-base-tooling:latest
-        docker push coderus/sailfishos-platform-sdk-base-tooling:$RELEASE
-        docker push coderus/sailfishos-platform-sdk:latest
-        docker push coderus/sailfishos-platform-sdk:$RELEASE
-        docker push coderus/sailfishos-platform-sdk-i486:latest
-        docker push coderus/sailfishos-platform-sdk-i486:$RELEASE
-        docker push coderus/sailfishos-platform-sdk-armv7hl:latest
-        docker push coderus/sailfishos-platform-sdk-armv7hl:$RELEASE
         docker push coderus/sailfishos-platform-sdk-aarch64:latest
         docker push coderus/sailfishos-platform-sdk-aarch64:$RELEASE
+        docker rmi -f coderus/sailfishos-platform-sdk-aarch64:$RELEASE
+        docker rmi -f coderus/sailfishos-platform-sdk-aarch64:latest
+        rm -rf build/target-aarch64.tar
