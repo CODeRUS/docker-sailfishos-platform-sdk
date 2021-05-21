@@ -13,7 +13,9 @@ repo --name=sdk-@RELEASE@-@ARCH@ --baseurl=https://releases.jolla.com/releases/@
 %packages
 patterns-sailfish-configuration-platform-sdk-chroot
 ssu-vendor-data-jolla
+patterns-sailfish-sb2-i486
 patterns-sailfish-sb2-armv7hl
+patterns-sailfish-sb2-aarch64
 kmod
 %end
 
