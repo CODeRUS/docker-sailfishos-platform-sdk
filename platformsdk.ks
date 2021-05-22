@@ -1,3 +1,4 @@
+user --name mersdk --groups audio,input,video --password mersdk
 timezone --utc UTC
 part / --fstype=ext4 --ondisk=sda --size=8192 --label=system
 
