@@ -6,7 +6,7 @@ ARG ARCH
 
 COPY build/target-$ARCH.tar /target-$ARCH.tar
 
-USER nemo
+USER mersdk
 WORKDIR /
 
 RUN set -ex ;\

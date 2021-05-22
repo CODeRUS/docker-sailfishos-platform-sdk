@@ -7,7 +7,7 @@ COPY build/target-i486.tar /target-i486.tar
 COPY build/target-armv7hl.tar /target-armv7hl.tar
 COPY build/target-aarch64.tar /target-aarch64.tar
 
-USER nemo
+USER mersdk
 WORKDIR /
 
 RUN set -ex ;\

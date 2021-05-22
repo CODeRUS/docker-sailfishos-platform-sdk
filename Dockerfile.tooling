@@ -5,7 +5,7 @@ ARG RELEASE
 
 COPY build/tooling-i486.tar /tooling-i486.tar
 
-USER nemo
+USER mersdk
 WORKDIR /
 
 RUN set -ex ;\
