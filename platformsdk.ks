@@ -12,6 +12,7 @@ patterns-sailfish-device-configuration-Platform-SDK-Chroot
 patterns-sailfish-sb2-i486
 patterns-sailfish-sb2-armv7hl
 patterns-sailfish-sb2-aarch64
+ssu-vendor-data-jolla
 %end
 
 %attachment

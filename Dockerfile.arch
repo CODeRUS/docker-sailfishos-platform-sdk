@@ -6,9 +6,6 @@ ARG ARCH
 
 COPY build/target-$ARCH.tar /target-$ARCH.tar
 
-USER mersdk
-WORKDIR /
-
 RUN set -ex ;\
  sudo zypper ref ;\
  sdk-assistant -y create SailfishOS-$RELEASE-$ARCH /target-$ARCH.tar ;\

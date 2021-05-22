@@ -7,9 +7,6 @@ COPY build/target-i486.tar /target-i486.tar
 COPY build/target-armv7hl.tar /target-armv7hl.tar
 COPY build/target-aarch64.tar /target-aarch64.tar
 
-USER mersdk
-WORKDIR /
-
 RUN set -ex ;\
  sudo zypper ref ;\
  sdk-assistant -y create SailfishOS-$RELEASE-i486 /target-i486.tar ;\

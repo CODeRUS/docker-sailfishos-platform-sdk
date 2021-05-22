@@ -6,7 +6,7 @@ ARG RELEASE
 COPY build/tooling-i486.tar /tooling-i486.tar
 
 USER mersdk
-WORKDIR /
+WORKDIR /home/mersdk
 
 RUN set -ex ;\
  sudo mkdir /host_targets ;\
