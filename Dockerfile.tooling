@@ -6,7 +6,7 @@ ARG RELEASE
 COPY build/tooling-i486.tar /tooling-i486.tar
 
 USER nemo
-WORKDIR /home/nemo
+WORKDIR /
 
 RUN set -ex ;\
  sudo mkdir /host_targets ;\
