@@ -65,6 +65,9 @@ fi
 [ -n "@RELEASE@" ] && ssu release @RELEASE@
 ssu mode 4
 ### end 60_ssu
+### begin 70_sdk-domain
+ssu domain sailfish
+### end 70_sdk-domain
 ### begin 90_accept_unsigned_packages
 sed -i /etc/zypp/zypp.conf \
     -e '/^# pkg_gpgcheck =/ c \

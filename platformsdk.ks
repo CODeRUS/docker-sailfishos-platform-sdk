@@ -65,6 +65,9 @@ fi
 [ -n "@RELEASE@" ] && ssu release @RELEASE@
 ssu mode 4
 ### end 60_ssu
+### begin 70_sdk-domain
+ssu domain sailfish
+### end 70_sdk-domain
 ### begin 90_accept_unsigned_packages
 sed -i /etc/zypp/zypp.conf \
     -e '/^# pkg_gpgcheck =/ c \
@@ -93,7 +96,7 @@ chmod -w /etc/sudoers
 %end
 
 %post --nochroot
-export SSU_RELEASE_TYPE=rnd
+export SSU_RELEASE_TYPE=release
 ### begin 50_os-release
 (
 CUSTOMERS=$(find $INSTALL_ROOT/usr/share/ssu/features.d -name 'customer-*.ini' \
