@@ -6,6 +6,7 @@ repo --name=adaptation0-jolla-@RELEASE@-@ARCH@ --baseurl=https://releases.jolla.
 repo --name=hotfixes-@RELEASE@-@ARCH@ --baseurl=https://releases.jolla.com/releases/@RELEASE@/hotfixes/@ARCH@/
 repo --name=jolla-@RELEASE@-@ARCH@ --baseurl=https://releases.jolla.com/releases/@RELEASE@/jolla/@ARCH@/
 repo --name=sdk-@RELEASE@-@ARCH@ --baseurl=https://releases.jolla.com/releases/@RELEASE@/sdk/@ARCH@/
+repo --name=customer-jolla-@RELEASE@-@ARCH@ --baseurl=https://releases.jolla.com/features/@RELEASE@/customers/jolla/@ARCH@/
 
 %packages
 patterns-sailfish-device-configuration-Platform-SDK-Chroot
