@@ -12,8 +12,8 @@ repo --name=sdk-@RELEASE@-@ARCH@ --baseurl=https://releases.jolla.com/releases/@
 repo --name=apps-@RELEASE@-@ARCH@ --baseurl=https://releases.jolla.com/jolla-apps/@RELEASE@/@ARCH@/
 
 %packages
+feature-jolla-sdk
 patterns-sailfish-device-configuration-Sailfish-SDK-Target
-ssu-vendor-data-jolla
 %end
 
 %attachment
