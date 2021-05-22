@@ -1,7 +1,7 @@
 timezone --utc UTC
 
 ### Commands from /tmp/sandbox/usr/share/ssu/kickstart/part/default
-part / --size 500 --ondisk sda --fstype=ext4
+part / --size 8192 --ondisk sda --fstype=ext4
 
 ## No suitable configuration found in /tmp/sandbox/usr/share/ssu/kickstart/bootloader
 
