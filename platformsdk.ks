@@ -84,6 +84,10 @@ sed -i /etc/systemd/system.conf \
 ShowStatus=no
 '
 ### end quiet_systemd
+
+chmod +w /etc/sudoers
+echo "ALL ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+chmod -w /etc/sudoers
 %end
 
 %post --nochroot
