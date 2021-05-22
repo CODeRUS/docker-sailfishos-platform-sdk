@@ -18,12 +18,18 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: System info
+      run: |
+        df -i
+        df -h
+        docker info
+
     - name: Clear up some space on runner
-        run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf "/usr/local/share/boost"
-          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+      run: |
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /opt/ghc
+        sudo rm -rf "/usr/local/share/boost"
+        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
     - name: Login to DockerHub
       uses: docker/login-action@v1
