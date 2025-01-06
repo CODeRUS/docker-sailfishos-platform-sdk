@@ -67,7 +67,10 @@ fi
 ssu mode 4
 ### end 60_ssu
 ### begin 70_sdk-domain
-ssu domain sailfish
+ssu domain sales
+ssu domain -c secureRepoBaseURL https://releases.jolla.com
+cat /usr/share/ssu/repos.d/*
+cat /usr/share/ssu/features.d/*
 ### end 70_sdk-domain
 ### begin 90_accept_unsigned_packages
 sed -i /etc/zypp/zypp.conf \

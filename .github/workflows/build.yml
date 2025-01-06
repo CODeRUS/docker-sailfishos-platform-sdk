@@ -9,7 +9,7 @@ on:
       - master
 
 env:
-  RELEASE: 3.4.0.24
+  RELEASE: 4.6.0.13
 
 jobs:
   build:

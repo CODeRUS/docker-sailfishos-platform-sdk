@@ -6,9 +6,12 @@ ARG ARCH
 
 COPY build/target-$ARCH.tar /target-$ARCH.tar
 
-RUN set -ex ;\
- sudo zypper ref ;\
- sdk-assistant -y create SailfishOS-$RELEASE-$ARCH /target-$ARCH.tar ;\
- sudo rm -f /target-$ARCH.tar ;\
- sudo rm -rf /var/cache/zypp/* ;\
- sudo rm -rf /srv/mer/targets/SailfishOS-$RELEASE-$ARCH/var/cache/zypp/*
+RUN <<EOF
+set -ex
+sudo ssu lr
+sudo zypper ref
+sdk-assistant -y create SailfishOS-$RELEASE-$ARCH /target-$ARCH.tar
+sudo rm -f /target-$ARCH.tar
+sudo rm -rf /var/cache/zypp/*
+sudo rm -rf /srv/mer/targets/SailfishOS-$RELEASE-$ARCH/var/cache/zypp/*
+EOF

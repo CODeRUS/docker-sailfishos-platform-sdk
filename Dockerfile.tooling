@@ -8,9 +8,12 @@ COPY build/tooling-i486.tar /tooling-i486.tar
 USER mersdk
 WORKDIR /home/mersdk
 
-RUN set -ex ;\
- sudo mkdir /host_targets ;\
- sudo zypper ref ;\
- sdk-assistant -y create SailfishOS-$RELEASE /tooling-i486.tar ;\
- sudo rm -f /tooling-i486.tar ;\
- sudo rm -rf /var/cache/zypp/*
+RUN <<EOF
+set -ex
+sudo mkdir /host_targets
+sudo ssu lr
+sudo zypper ref
+sdk-assistant -y create SailfishOS-$RELEASE /tooling-i486.tar
+sudo rm -f /tooling-i486.tar
+sudo rm -rf /var/cache/zypp/*
+EOF

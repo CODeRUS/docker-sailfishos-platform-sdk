@@ -3,26 +3,37 @@ MAINTAINER Andrey Kozhevnikov <coderusinbox@gmail.com>
 
 ARG RELEASE
 
-RUN set -ex ;\
- sudo zypper ref
+RUN <<EOF
+set -ex
+sudo ssu lr
+sudo zypper ref
+EOF
 
 COPY build/target-i486.tar /target-i486.tar
-RUN set -ex ;\
- sdk-assistant -y create SailfishOS-$RELEASE-i486 /target-i486.tar ;\
- sudo rm -f /target-i486.tar
+RUN <<EOF
+set -ex
+sdk-assistant -y create SailfishOS-$RELEASE-i486 /target-i486.tar
+sudo rm -f /target-i486.tar
+EOF
 
 COPY build/target-armv7hl.tar /target-armv7hl.tar
-RUN set -ex ;\
- sdk-assistant -y create SailfishOS-$RELEASE-armv7hl /target-armv7hl.tar ;\
- sudo rm -f /target-armv7hl.tar
+RUN <<EOF
+set -ex
+sdk-assistant -y create SailfishOS-$RELEASE-armv7hl /target-armv7hl.tar
+sudo rm -f /target-armv7hl.tar
+EOF
 
 COPY build/target-aarch64.tar /target-aarch64.tar
-RUN set -ex ;\
- sdk-assistant -y create SailfishOS-$RELEASE-aarch64 /target-aarch64.tar ;\
- sudo rm -f /target-aarch64.tar
+RUN <<EOF
+set -ex
+sdk-assistant -y create SailfishOS-$RELEASE-aarch64 /target-aarch64.tar
+sudo rm -f /target-aarch64.tar
+EOF
  
-RUN set -ex ;\
- sudo rm -rf /var/cache/zypp/* ;\
- sudo rm -rf /srv/mer/targets/SailfishOS-$RELEASE-armv7hl/var/cache/zypp/* ;\
- sudo rm -rf /srv/mer/targets/SailfishOS-$RELEASE-i486/var/cache/zypp/* ;\
- sudo rm -rf /srv/mer/targets/SailfishOS-$RELEASE-aarch64/var/cache/zypp/*
+RUN <<EOF
+set -ex
+sudo rm -rf /var/cache/zypp/*
+sudo rm -rf /srv/mer/targets/SailfishOS-$RELEASE-armv7hl/var/cache/zypp/*
+sudo rm -rf /srv/mer/targets/SailfishOS-$RELEASE-i486/var/cache/zypp/*
+sudo rm -rf /srv/mer/targets/SailfishOS-$RELEASE-aarch64/var/cache/zypp/*
+EOF

@@ -21,14 +21,14 @@ patterns-sailfish-device-configuration-Sailfish-SDK-Target
 %end
 
 %pre --erroronfail
-export SSU_RELEASE_TYPE=rnd
+export SSU_RELEASE_TYPE=release
 ### begin 01_init
 touch $INSTALL_ROOT/.bootstrap
 ### end 01_init
 %end
 
 %post --erroronfail
-export SSU_RELEASE_TYPE=rnd
+export SSU_RELEASE_TYPE=release
 ### begin 01_arch-hack
 if [ "@ARCH@" == armv7hl ] || [ "@ARCH@" == armv7tnhl ] || [ "@ARCH@" == aarch64 ]; then
     # Without this line the rpm does not get the architecture right.
@@ -69,7 +69,8 @@ fi
 ssu mode 4
 ### end 60_ssu
 ### begin 70_sdk-domain
-ssu domain sailfish
+ssu domain sales
+ssu domain -c secureRepoBaseURL https://releases.jolla.com
 ### end 70_sdk-domain
 ### begin 90_accept_unsigned_packages
 sed -i /etc/zypp/zypp.conf \
@@ -85,15 +86,10 @@ sed -i /etc/zypp/zypper.conf \
 psCheckAccessDeleted = no
 '
 ### end 90_zypper_skip_check_access_deleted
-### begin 99_domain
-if [ "$SSU_RELEASE_TYPE" = "rnd" ]; then
-    ssu domain community
-fi
-### end 99_domain
 %end
 
 %post --nochroot --erroronfail
-export SSU_RELEASE_TYPE=rnd
+export SSU_RELEASE_TYPE=release
 ### begin 50_os-release
 (
 CUSTOMERS=$(find $INSTALL_ROOT/usr/share/ssu/features.d -name 'customer-*.ini' \
